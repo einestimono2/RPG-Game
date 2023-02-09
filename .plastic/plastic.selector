@@ -1,0 +1,4 @@
+repository "RPG Game@Tiiee@cloud"
+  path "/"
+    br "/main"
+    co "/main"
