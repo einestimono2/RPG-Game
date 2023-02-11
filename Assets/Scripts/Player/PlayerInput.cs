@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Các nút bấm của player
 public class PlayerInput : MonoBehaviour
 {
    

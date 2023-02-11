@@ -37,8 +37,8 @@ public class CharacterStats : MonoBehaviour
     public float damageAbsorptionCape;
 
     [Header("Blocking Absorption")]
-    public float blockingDamageAbsorption;
-    public float blockingStabilityRating;
+    public float blockingDamageAbsorption; // % damage giảm
+    public float blockingStabilityRating; // % stamina mất khi chặn lượng damage
 
     public virtual void TakeDame(float damage){
         

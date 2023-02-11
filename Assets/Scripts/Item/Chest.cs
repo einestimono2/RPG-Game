@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
 
+// Thông tin vật phẩm trong rương
 [System.Serializable]
 public class ChestItem
 {
@@ -63,6 +64,8 @@ public class Chest : Interactable
         else OpenChest();
     }
 
+    // Cập nhật lại tham chiếu khi load scene
+    //! Load scene sẽ bị mất tham chiếu do rương đó ở map khác, trong khi tham chiếu này ở map trước đó
     void AssignRefs(){
         if(decorationsUI == null) decorationsUI = playerInput.playerManager.decorationsUI;
         if(equipmentUI == null) equipmentUI = playerInput.playerManager.equipmentUI;
@@ -121,6 +124,9 @@ public class Chest : Interactable
         }
     }
 
+    // Cập nhật lại vật phẩm khi đóng rương
+    //! Do có thể lấy vật phẩm hoặc để vào trong đó nên ds vật phẩm bị thay đổi so với mặc định
+    //! Nên cần cập nhật lại mỗi khi đóng rương
     void UpdateItemAndDestroySlot(){
         List<ChestItem> _items = new List<ChestItem>();
 

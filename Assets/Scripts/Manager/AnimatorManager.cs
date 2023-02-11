@@ -6,6 +6,7 @@ public class AnimatorManager : MonoBehaviour
 
     public bool canRotate;
     
+    // Chạy aniamtion
     public void PlayAnimation(string targetAnimation, bool isInteracting, bool canRotate = false, bool isMirrored = false){
         anim.applyRootMotion = isInteracting;
         anim.SetBool("canRotate", canRotate);

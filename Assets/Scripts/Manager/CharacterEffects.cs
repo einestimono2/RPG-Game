@@ -9,7 +9,7 @@ public class CharacterEffects : MonoBehaviour
     [Header("Blood FX")]
     public GameObject bloodSplatterFX;
 
-
+    // Hiệu ứng khi chém
     public virtual void PlayWeaponFX(bool isLeft){
         if(isLeft){
             if(leftWeaponFX != null){
@@ -22,7 +22,9 @@ public class CharacterEffects : MonoBehaviour
         }
     }
 
+    // Hiệu ứng máu khi nhận damaeg
     public virtual void PlayBloodSplatterFX(Vector3 location){
+        // Quaternion.identity: không biến đổi góc của đối tượng
         GameObject blood = Instantiate(bloodSplatterFX, location, Quaternion.identity);
     }
 }

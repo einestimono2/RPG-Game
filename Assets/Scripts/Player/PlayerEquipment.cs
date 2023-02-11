@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Enums;
 
+// Lưu trữ thông tin vật phẩm hiện tại của người dùng
 public class PlayerEquipment : MonoBehaviour
 {
     [Header("Refs")]
@@ -40,6 +41,7 @@ public class PlayerEquipment : MonoBehaviour
         LoadStartEquipment();
     }
 
+    // Set null tất cả ==> Khi chết
     public void DeleteAllEquipments(){
         arrow = null;
         rightWeapon = null;
@@ -54,6 +56,7 @@ public class PlayerEquipment : MonoBehaviour
         LoadStartEquipment();
     }
 
+    // Khởi tạo trang bị có sẵn của người dùng
     public void LoadStartEquipment(){
         // Weapon
         weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);

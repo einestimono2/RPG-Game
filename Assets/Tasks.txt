@@ -4,6 +4,7 @@
 - NV tăng cấp, chỉ số cơ bản
 
 
+
 ==================== COMPLETED ====================
 - Hồi sinh ==> OK
 - Hết cung không cho bắn ==> OK

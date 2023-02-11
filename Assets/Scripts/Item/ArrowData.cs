@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Enums;
 
+// Thông tin mũi tên
 [CreateAssetMenu(menuName = "Items/Arrow")]
 public class ArrowData : Item
 {

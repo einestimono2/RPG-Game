@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Bắn tên khi nhả chuột phải khi đang trong trạng thái ngắm bắn
 [CreateAssetMenu(menuName = "Item Actions/Fire Arrow Action")]
 public class FireArrowAction : ItemAction
 {
@@ -22,13 +23,16 @@ public class FireArrowAction : ItemAction
         // Tạo và bắn tên
         GameObject liveArrow = Instantiate(playerManager.playerEquipment.arrow.liveItemModel, arrowInstantiationLocation.transform.position, playerManager.transform.rotation);
 
-
+        // Tạo một tia xuyên qua 1 điểm ở trung tâm màn hình từ camera 
         Ray ray = playerManager.cameraObject.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hitPoint;
 
+        // Nếu tia đó tiếp xúc với bất kì đói tượng nào đó trong phạm vi <= 100f
         if(Physics.Raycast(ray, out hitPoint, 100f)){
+            // Mũi tên luôn hướng vào đối tượng đó
             liveArrow.transform.LookAt(hitPoint.point);
         }else{
+            // Gán rotation của mũi tên theo camera
             liveArrow.transform.rotation = Quaternion.Euler(playerManager.cameraObject.transform.localEulerAngles.x, playerManager.cameraObject.transform.eulerAngles.y, 0);
         }
 
@@ -42,12 +46,14 @@ public class FireArrowAction : ItemAction
 
         liveArrow.transform.parent = null;
 
-        // Set damage
+        // Set damage của mũi tên
         RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
         damageCollider.arrow = playerManager.playerEquipment.arrow;
         damageCollider.currentWeaponDamage = playerManager.playerEquipment.arrow.damage + playerManager.playerEquipment.leftWeapon.baseDamage;
+        damageCollider.characterManager = playerManager;
 
         playerManager.isAiming = false;
+        // Cập nhật số lượng mũi tên
         playerManager.playerEquipment.arrowStack--;
         playerManager.playerEquipment.equipmentManager.UpdateArrow(playerManager.playerEquipment.arrow, playerManager.playerEquipment.arrowStack);
     }

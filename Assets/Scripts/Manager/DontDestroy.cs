@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Không phá hủy đối tượng khi load scene
 public class DontDestroy : MonoBehaviour
 {
     public string objectID;

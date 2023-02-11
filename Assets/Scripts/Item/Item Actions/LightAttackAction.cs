@@ -34,6 +34,7 @@ public class LightAttackAction : ItemAction
                 playerManager.playerCombat.lastAttack = playerManager.playerCombat.oh_lightAttack2;
                 
                 // FX
+                playerManager.characterSound.PlaySound("attack");
                 playerManager.playerEffects.PlayWeaponFX(true);
             }
         }else{
@@ -43,6 +44,7 @@ public class LightAttackAction : ItemAction
 
                 // FX
                 playerManager.playerEffects.PlayWeaponFX(false);
+                playerManager.characterSound.PlaySound("attack");
             }
         }
     }
@@ -54,12 +56,14 @@ public class LightAttackAction : ItemAction
 
             // FX
             playerManager.playerEffects.PlayWeaponFX(true);
+            playerManager.characterSound.PlaySound("attack");
         }else if(playerManager.isUsingRightHand){
             playerManager.playerAnimator.PlayAnimation(playerManager.playerCombat.oh_lightAttack1, true);
             playerManager.playerCombat.lastAttack = playerManager.playerCombat.oh_lightAttack1;
 
             // FX
             playerManager.playerEffects.PlayWeaponFX(false);
+            playerManager.characterSound.PlaySound("attack");
         }
     }
 

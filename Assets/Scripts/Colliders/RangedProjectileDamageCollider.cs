@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Collider của mũi tên (gây sát thương)
 public class RangedProjectileDamageCollider : DamageCollider
 {
     public ArrowData arrow;
@@ -7,6 +8,7 @@ public class RangedProjectileDamageCollider : DamageCollider
     protected GameObject penetratedProjectile;
 
     protected override void OnTriggerEnter(Collider other){
+        // Mũi tên trúng player (tương tự damage collider)
         if(other.tag == "Player"){
             parried = false;
             blocked = false;
@@ -37,6 +39,7 @@ public class RangedProjectileDamageCollider : DamageCollider
             }
         }
 
+        // Mũi tên trúng quái vật (tương tự damage collider)
         if(other.tag == "Enemy"){
             EnemyManager enemyManager = other.GetComponent<EnemyManager>();
 
@@ -54,17 +57,22 @@ public class RangedProjectileDamageCollider : DamageCollider
             }
         }
     
+        // Mũi tên gắn lên target
         if(!hasAlreadyPenetratedASurface && penetratedProjectile == null){
             hasAlreadyPenetratedASurface = true;
         
+            // Lấy vị trí va chạm
             Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+            // Khởi tạo bản sao của mũi tên ở vị trí đó với góc quay 0,0,0 (Quaternion.Euler)
             GameObject penetratedArrow = Instantiate(arrow.penetratedItemModel, contactPoint, Quaternion.Euler(0, 0, 0));
         
+            // Gán thông tin
             penetratedProjectile = penetratedArrow;
             penetratedArrow.transform.parent = other.transform;
             penetratedArrow.transform.rotation = Quaternion.LookRotation(gameObject.transform.forward);
         }
 
+        // Hủy mũi tên đang bay đi 
         Destroy(transform.root.gameObject);
     }
 }

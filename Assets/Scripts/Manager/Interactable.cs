@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Đối tượng có thể tương tác
 public class Interactable : MonoBehaviour
 {
     float radius = 0.5f;

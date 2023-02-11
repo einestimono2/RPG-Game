@@ -12,15 +12,15 @@ public class EnemyAnimator : AnimatorManager
         enemyEffects = GetComponent<EnemyEffects>();
     }
 
-    public void PlayWeaponTrailFX(){
-        enemyEffects.PlayWeaponFX(false);
+    public void PlayWeaponTrailFX(bool isLeft = false){
+        enemyEffects.PlayWeaponFX(isLeft);
     }
 
     void OnAnimatorMove(){
         enemyManager.rig.drag = 0;
 
         Vector3 deltaPosition = anim.deltaPosition;
-        // deltaPosition.y = 0;
+        deltaPosition.y = 0;
 
         Vector3 velocity = deltaPosition / Time.deltaTime;
         if (!float.IsNaN(velocity.x) && !float.IsNaN(velocity.y) && !float.IsNaN(velocity.z)){

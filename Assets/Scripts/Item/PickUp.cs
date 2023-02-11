@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+// Vật phẩm nhặt
 public class PickUp : Interactable, ISerializationCallbackReceiver
 {
     public Item item;
@@ -22,6 +23,7 @@ public class PickUp : Interactable, ISerializationCallbackReceiver
         inventoryManager.AddItem(this);
     }
 
+    // 2D Icon ở trên map
     public void SetSerialize(){
         GetComponentInChildren<SpriteRenderer>().sprite = item.itemIcon;
         EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());

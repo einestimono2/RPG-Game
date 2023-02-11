@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+// Nhân vật di chuyển
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Refs")]
     PlayerManager playerManager;
     Transform cameraTransform; // cameraObject
     PlayerInput playerInput;
@@ -25,9 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public float inAirTimer;
 
     [Header("Movement Stats")]
-    [SerializeField] float movementSpeed = 10f;
+    [SerializeField] float movementSpeed = 6f;
     [SerializeField] float walkingSpeed = 5f;
-    [SerializeField] float sprintSpeed = 15f;
+    [SerializeField] float sprintSpeed = 12f;
     [SerializeField] float rotationSpeed = 8f;
     [SerializeField] float fallingSpeed = 550f;
     [SerializeField] float jumpForce = 550f;
@@ -55,13 +57,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if (jumpForceApplied)
-        {
+        if (jumpForceApplied){
             StartCoroutine(DisableForce());
             rig.AddForce(transform.up * jumpForce);
         }
     }
 
+    // Tắt áp dụng lực sau x(s)
     IEnumerator DisableForce(){
         yield return new WaitForSeconds(0.3f);
         jumpForceApplied = false;
@@ -75,11 +77,13 @@ public class PlayerMovement : MonoBehaviour
         if(playerInput.rollFlag || playerManager.isInteracting || !playerManager.isGrounded) return;
 
         direction = cameraTransform.forward * playerInput.vertical + cameraTransform.right * playerInput.horizontal;
+        // Chuẩn hóa Vector (tổng bình phương các phần tử của nó bằng 1)
         direction.Normalize();
-        direction.y = 0;
+        direction.y = 0; // Cập nhật y = 0 <=> tiếp xúc với mặt đất
 
         float speed = movementSpeed;
 
+        // Trường hợp chạy ==> Kiểm tra stamina đủ không ==> Update speed
         if(playerInput.sprintFlag && playerInput.moveAmount > 0.5f){
             if(playerManager.playerStats.currentStamina >= sprintCost){
                 speed = sprintSpeed;
@@ -103,8 +107,9 @@ public class PlayerMovement : MonoBehaviour
             } 
         }
 
+        // Tính toán projection (tính toán phần của một vector gắn với một mặt phẳng, bỏ qua phần dọc trục của mặt phẳng) của 'direction' trên mặt phẳng 'normalVector'
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(direction, normalVector);
-        rig.velocity = projectedVelocity;
+        rig.velocity = projectedVelocity; // Cập nhật tốc độ theo 3 trục của vector3 'projectedVelocity'
 
         playerAnimator.UpdateAnimator(playerInput.moveAmount, 0, playerManager.isSprinting);
     }
@@ -162,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
             if(playerManager.isInAir){ 
                 if(inAirTimer > 0.5f){
                     playerAnimator.PlayAnimation("Land", true);
+                    playerManager.characterSound.PlaySound("land");
                     inAirTimer = 0;
                 }else{
                     playerAnimator.PlayAnimation("Empty", false);
@@ -202,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
                 direction = cameraTransform.forward * playerInput.vertical + cameraTransform.right * playerInput.horizontal;
 
                 playerAnimator.PlayAnimation("Jump", true);
+                playerManager.characterSound.PlaySound("jump");
 
                 jumpForceApplied = true;
 
@@ -210,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
                 myTransform.rotation = jumpRotation;
             }else{
                 playerAnimator.PlayAnimation("Jump", true);
+                playerManager.characterSound.PlaySound("jump");
             }
             
         }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Lưu trữ hiệu ứng/vật phẩm hiện tại
 public class PlayerEffects : CharacterEffects
 {
     public GameObject currentRangeFX;
@@ -17,7 +18,9 @@ public class PlayerEffects : CharacterEffects
         weaponSlotManager = GetComponent<WeaponSlotManager>();
     }
 
+    // Khi uống thuốc HP/MP/EXP
     public void BuffPlayerFromEffect(){
+        // Thêm vào 
         if(type == "EXP"){
             playerStats.AddEXP(amount);
         }else if(type == "MP"){
@@ -26,8 +29,10 @@ public class PlayerEffects : CharacterEffects
             playerStats.HealHP(amount);
         }
 
+        // Hủy bình uống
         Destroy(instantiateFX.gameObject);
 
+        // Cập nhật lại vũ khí ở tay đó (vũ khí trước khi hủy để tạo bình uống)
         weaponSlotManager.LoadAllWeapons();
     }
     

@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Enums;
 
+// Vật phẩm tiêu thụ: EXP, MP, HP
 public class Consumable : Item
 {
     [Header("Model")]
@@ -15,6 +16,7 @@ public class Consumable : Item
         equipType = EquipType.Hotbar;
     }
 
+    // Sử dụng vật phẩm
     public virtual void AttemptToConsumableItem(AnimatorManager animatorManager, WeaponSlotManager weaponSlotManager, PlayerEffects playerEffects){
         animatorManager.PlayAnimation(animation, isInteracting);
     }

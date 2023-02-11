@@ -4,7 +4,6 @@ using static Enums;
 public class EquipmentManager : MonoBehaviour
 {
     [Header("Refs")]
-    // public BlockingCollider blockingCollider;
     PlayerEquipment playerEquipment;
     PlayerStats playerStats;
 
@@ -35,16 +34,8 @@ public class EquipmentManager : MonoBehaviour
         helmetModelChanger = GetComponentInChildren<HelmetModelChanger>();
         legsModelChanger = GetComponentInChildren<LegsModelChanger>();
     }
-    
-    // public void EnableBlocking(){
-    //     blockingCollider.SetDamageAbsorption(playerEquipment.leftWeapon);
-    //     blockingCollider.EnableCollider();
-    // }
 
-    // public void DisableBlocking(){
-    //     blockingCollider.DisableCollider();
-    // }
-
+    // Mặc model
     public void EquipModel(string modelName, EquipType modelType){
         switch (modelType){
             case EquipType.Helmet:
@@ -82,6 +73,7 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
+    // Cập nhật arrow và stack
     public void UpdateArrow(ArrowData arrow, int arrowStack){
         if(arrow != null && arrowStack > 0){
             quiverObj.SetActive(true);
@@ -94,6 +86,7 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
+    // Cập nhật comsumable (HP, EXP, MP) và stack
     public void UpdateConsumable(Consumable consumable, int consumableStack){
         if(consumable != null && consumableStack > 0){
             consumableSlot.item = consumable;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerManager : CharacterManager
 {
@@ -13,6 +14,7 @@ public class PlayerManager : CharacterManager
     public PlayerStats playerStats;
     public PlayerAnimator playerAnimator;
     public WeaponSlotManager weaponSlotManager;
+    public CharacterSound characterSound;
 
     [Header("UI Refs")]
     public GameObject decorationsUI;
@@ -38,9 +40,12 @@ public class PlayerManager : CharacterManager
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimator = GetComponent<PlayerAnimator>();
         weaponSlotManager = GetComponent<WeaponSlotManager>();
+        characterSound = GetComponent<CharacterSound>();
         anim = GetComponent<Animator>();
 
         cameraObject = Camera.main;
+
+        GetComponentInChildren<EventSystem>().enabled = false;
     }
 
     // Update is called once per frame
@@ -59,20 +64,16 @@ public class PlayerManager : CharacterManager
 
         playerAnimator.canRotate = anim.GetBool("canRotate");
 
-        #region PlayerMovement
         playerMovement.HandleRotation();
         playerMovement.HandleRolling();
         playerMovement.HandleJumping();
-        #endregion
 
     }
 
     // Nên thực hiện FixedUpdate khi có AddForce or MovePosition
     void FixedUpdate(){
-        #region PlayerMovement
         playerMovement.HandleMovement();
         playerMovement.HandleFalling(playerMovement.direction);
-        #endregion
     }
 
     void LateUpdate(){
@@ -94,6 +95,7 @@ public class PlayerManager : CharacterManager
 
     }
 
+    // Cập nhật tay khi sử dụng vũ khí
     public void SetHandIsUsing(bool usingRightHand){
         if(usingRightHand){
             isUsingRightHand = true;

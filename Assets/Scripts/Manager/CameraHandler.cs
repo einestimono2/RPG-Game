@@ -10,6 +10,7 @@ public class CameraHandler : MonoBehaviour
         ChangeCursor(true);
     }
 
+    // Hiển thị/Ẩn chuột trong game
     public void ChangeCursor(bool hidden, bool isStop = false){
         if(hidden){
             Cursor.lockState = CursorLockMode.Locked;
@@ -32,6 +33,7 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
+    
     void ActiveCinemachineInputProvider(){
         foreach(Cinemachine.CinemachineInputProvider inputProvider in cinemachineInputProviders){
             inputProvider.enabled = true;

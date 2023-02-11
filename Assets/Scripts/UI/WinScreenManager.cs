@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WinScreenManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class WinScreenManager : MonoBehaviour
     }
 
     public void Quit(){
+        GetComponentInChildren<EventSystem>().enabled = false;
         SceneController.instance.LoadScene(0);
     }
 }

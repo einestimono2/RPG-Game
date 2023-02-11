@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Đối tượng sẽ hướng vào camera của người dùng
 public class Billboard : MonoBehaviour
 {
     Camera _camera;

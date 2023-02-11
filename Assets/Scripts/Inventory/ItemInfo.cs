@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using static Enums;
 
+// Thông tin của vật phẩm đó
 public class ItemInfo : MonoBehaviour
 {
     public Image icon;
@@ -12,11 +13,11 @@ public class ItemInfo : MonoBehaviour
     public TMP_Text itemSellPrice;
     public TMP_Text itemBuyPrice;
     
-
+    // Khởi tạo UI
     public void Initialize(Item item){
         icon.sprite = item.itemIcon;
         itemName.text = item.itemName;
-        itemDescription.text = item.itemDescription + "===";
+        itemDescription.text = item.itemDescription;
 
 
         switch (item.itemType){
@@ -86,7 +87,7 @@ $@"→ DAMAGE
    • Arrow Mass: {_item.arrowMass.ToString()}
 ";
 
-    string GetConsumableStats(Flask _item) => 
+    string GetConsumableStats(Flask _item) => _item == null ? "" :
 $@"→ AMOUNT
    • Amount: {_item.amount.ToString()}
 ";

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+// Các tương tác của người dùng
 public class PlayerInteract : MonoBehaviour
 {
     [Header("Settings")]
@@ -29,6 +30,7 @@ public class PlayerInteract : MonoBehaviour
     public void CheckInteract(){
         RaycastHit hit;
 
+        // Kiểm tra trong bán kinh radius tại vị trí của người dùng có tiếp xúc với đối tượng tương tác nào không?
         if(Physics.SphereCast(transform.position, radius, transform.forward, out hit, range, interactableLayers)){
             if(hit.collider.tag == "Pick Up"){
                 PickUp pickUp = hit.transform.GetComponent<PickUp>();
@@ -68,7 +70,7 @@ public class PlayerInteract : MonoBehaviour
             else if(hit.collider.tag == "Door"){
                 Door door = hit.transform.GetComponent<Door>();
 
-                if(door != null){
+                if(door != null && !door.isLocked){
                     bool hasKey = true;
 
                     // Cửa cần chìa khóa

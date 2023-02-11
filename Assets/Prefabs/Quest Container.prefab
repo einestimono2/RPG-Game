@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: + Let's depart for 'Moongarden' (1/1)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
-  m_sharedMaterial: {fileID: -3021309969052818414, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -320,8 +320,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: + Looks like you're ready (1/1)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
-  m_sharedMaterial: {fileID: -3021309969052818414, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -560,8 +560,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: + Good luck and good luck! (1/1)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
-  m_sharedMaterial: {fileID: -3021309969052818414, guid: 471503c73017c364dba4f6cdab49daba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

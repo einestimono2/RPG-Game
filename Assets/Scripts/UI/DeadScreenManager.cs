@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DeadScreenManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class DeadScreenManager : MonoBehaviour
     }
 
     public void Quit(){
+        GetComponentInChildren<EventSystem>().enabled = false;
         SceneController.instance.LoadScene(0);
     }
 }

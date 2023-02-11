@@ -1,4 +1,7 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -8,6 +11,8 @@ public class PauseMenuManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject pauseScreen;
+
+    public bool isPaused;
 
     void Awake() {
         playerInput = GetComponentInParent<PlayerInput>();
@@ -43,6 +48,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     public void PauseGame(){
+        isPaused = true;
         playerInput.cameraHandler.ChangeCursor(playerInput.pauseFlag, true);
         pauseScreen.SetActive(true);
             
@@ -50,6 +56,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     public void ResumeGame(){
+        isPaused = false;
         playerInput.cameraHandler.ChangeCursor(playerInput.pauseFlag, true);
         pauseScreen.SetActive(false);
                 
@@ -57,6 +64,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     public void QuitGame(){
+        GetComponentInChildren<EventSystem>().enabled = false;
         SceneController.instance.LoadScene(0);
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Enums;
 
+// Thông tin vật phẩm chung
 public class Item : ScriptableObject
 {
     [Header("Item Information")]

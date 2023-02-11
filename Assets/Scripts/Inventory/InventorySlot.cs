@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using static Enums;
 
+// Một ô trong kho đồ
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Popup Settings")]
@@ -67,6 +68,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         UpdateSlot();
     }
 
+    // Kiểm tra có thể đặt vật phẩm vào hay không? (Cùng type)
     bool CanPlaceInSlot(InventorySlot _itemFrom, InventorySlot _itemTo){
         // Swap trong kho đồ hoặc trong rương
         if((_itemTo.itemType == ItemType.None || _itemTo.itemType == ItemType.Chest) && _itemTo.equipType == EquipType.None) return true;
@@ -81,7 +83,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         return false;
     }
 
-    // Khi ấn
+    // Sự kiện với chuột
+    // Khi ấn chuột
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData){
         if(!dragDropHandler.isDragging){
             if(eventData.button == PointerEventData.InputButton.Left && item != null){
@@ -94,7 +97,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    // Khi thả
+    // Khi thả chuột
+    // Cập nhật lại slotFrom và slotTo
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData){
         if(dragDropHandler.isDragging){
             // Drop
@@ -121,7 +125,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    // Khi con trỏ chỉ vào 1 nút
+    // Khi con trỏ chỉ vào 1 ô ==> Hiển thị thông tin của vật phẩm đấy
+    // Cập nhật lại slotFrom và slotTo
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData){
         if(dragDropHandler.isDragging){
             dragDropHandler.slotTo = this;
@@ -132,7 +137,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    // Khi con trỏ rời khỏi nút đó
+    // Khi con trỏ rời khỏi nút đó ==> Ẩn thông tin nếu đã hiển thị
+    // Cập nhật lại slotFrom và slotTo
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData){
         if(dragDropHandler.isDragging){
             dragDropHandler.slotTo = null;

@@ -1,8 +1,17 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public EventSystem eventSystem;
+
+    private void Awake() {
+        eventSystem = GetComponentInChildren<EventSystem>();
+    }
+
     private void Start() {
+        eventSystem.enabled = true;
+        
         // StartGame();
     }
 
@@ -12,6 +21,8 @@ public class MainMenuManager : MonoBehaviour
     }
 
     public void StartGame(){
+        eventSystem.enabled = false;
+
         SceneController.instance.LoadScene(1);
     }
 }

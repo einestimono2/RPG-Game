@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
+// Zoom/Unzoom cam qua lại khi ngắm cung
 public class SwitchCam : MonoBehaviour
 {
     public PlayerManager playerManager;

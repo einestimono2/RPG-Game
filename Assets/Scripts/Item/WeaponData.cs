@@ -1,6 +1,8 @@
 using UnityEngine;
 using static Enums;
 
+// Thông tin vũ khí
+
 // fileName: Tên tệp mặc định khi tạo mới loại này.
 // menuName: Tên hiển thị cho loại này được hiển thị trong Assets/Create menu
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Items/Weapon")]

@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Enums;
 
+// Dịch chuyển
 public class Portal : Interactable
 {
     [Header("Settings")]

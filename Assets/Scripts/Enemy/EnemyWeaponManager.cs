@@ -44,8 +44,8 @@ public class EnemyWeaponManager : MonoBehaviour
     }
 
     public void EnableAllWeaponDamage(){
-        if(rightHandDamage != null) rightHandDamage.EnableCollider();
-        if(leftHandDamage != null) leftHandDamage.EnableCollider();
+        EnableRightWeaponDamage();
+        EnableLeftWeaponDamage();
     }
 
     public void DisableWeaponDamage(){

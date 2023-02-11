@@ -26,6 +26,7 @@ public class EnemyManager : CharacterManager
 
     [Header("Enemy State")]
     public bool isPerformingAction;
+    public bool baseStateIsIdle;
     public State baseState;
     public State currentState;
 
@@ -53,6 +54,13 @@ public class EnemyManager : CharacterManager
         enemyAnimator = GetComponent<EnemyAnimator>();
 
         basePosition = transform.position;
+
+        if(baseStateIsIdle){
+            baseState = GetComponentInChildren<IdleState>();
+        }else{
+            baseState = GetComponentInChildren<AmbushState>();
+        }
+
         currentState = baseState;
     }
 

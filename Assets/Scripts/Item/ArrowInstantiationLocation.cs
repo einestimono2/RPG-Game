@@ -1,16 +1,7 @@
 using UnityEngine;
 
+// Vị trí để tạo mũi tên ==> Dùng khi fire arrow
 public class ArrowInstantiationLocation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

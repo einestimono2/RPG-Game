@@ -616,22 +616,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.41239855
-        functionName: CanCombo
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.44599023
         functionName: DisableWeaponDamage
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5290765
-        functionName: StopCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

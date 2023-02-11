@@ -41,6 +41,7 @@ public class InventoryManager : MonoBehaviour
         GenerateInventory();
     }
 
+    // Khởi tạo danh sách trang bị hiện tại của player
     void GenerateEquipment(){
         // Helmet: index 0
         if(playerEquipment.helmet != null){
@@ -132,6 +133,7 @@ Coins: {playerStats.coin}
         ";
     }
 
+    // Khởi tạo giao diện kho đồ (các ô)
     void GenerateInventory(){
         List<InventorySlot> _inventorySlots = new List<InventorySlot>();
 
@@ -144,11 +146,14 @@ Coins: {playerStats.coin}
         inventorySlots = _inventorySlots.ToArray();
     }
 
+    // Thêm vật phẩm vào kho đồ khi nhặt vật phẩm
     public void AddItem(PickUp pickUp){
-        // Stackable
+        // Vật phẩm có thể stack (số lượng > 1)
         if(pickUp.item.maxStack > 1){
+            // Vị trí của vật phẩm đó
             InventorySlot stackableSlot = null;
 
+            // Tìm kiểm xem vật phẩm đó có trong kho đồ hay chưa
             for (int i = 0; i < inventorySlots.Length; i++){
                 if(inventorySlots[i].item != null){
                     if(inventorySlots[i].item == pickUp.item && inventorySlots[i].stackSize < pickUp.item.maxStack){
@@ -158,8 +163,11 @@ Coins: {playerStats.coin}
                 }
             }
 
+            // Vật phẩm đã có trong kho đồ
             if(stackableSlot != null){
                 // Vượt quá maxStack
+                // Gán stack của vật phẩm hiện tại = max
+                // Tạo một vị trí mới = stack còn lại
                 if(stackableSlot.stackSize + pickUp.stackSize > pickUp.item.maxStack){
                     int amountLeft = (stackableSlot.stackSize + pickUp.stackSize) - pickUp.item.maxStack;
 
@@ -169,26 +177,37 @@ Coins: {playerStats.coin}
                         if (inventorySlots[i].item == null){
                             inventorySlots[i].AddItem(pickUp.item, amountLeft);
                             inventorySlots[i].UpdateSlot();
-                            // Event
+
+                            // Event khi nhận được 1 vật phẩm (Với nhiệm vụ nhặt/thu thập vật phẩm)
                             EventManager.ItemFetched(pickUp.item, pickUp.stackSize);
 
                             break;
                         }
                     }
 
+                    // Hủy item đã nhặt
                     Destroy(pickUp.gameObject);
-                }else{
+                }
+                // tổng stack <= maxStack ==> Cập nhật stack
+                else{
                     stackableSlot.AddStackAmount(pickUp.stackSize);
-                    // Event
+                    
+                    // Event khi nhận được 1 vật phẩm (Với nhiệm vụ nhặt/thu thập vật phẩm)
                     EventManager.ItemFetched(pickUp.item, pickUp.stackSize);
+                    
+                    // Hủy item đã nhặt
                     Destroy(pickUp.gameObject);
                 }
 
+                // Cập nhật lại thông tin của slot đó
                 stackableSlot.UpdateSlot();
-            }else{
+            }
+            // Vật phẩm chưa có trong kho đồ
+            else{
+                // Vị trí trống để đặt vật phẩm đó vào
                 InventorySlot emptySlot = null;
 
-                // Tìm vị trí trống
+                // Tìm vị trí trống trong danh sách
                 for (int i = 0; i < inventorySlots.Length; i++){
                     if (inventorySlots[i].item == null){
                         emptySlot = inventorySlots[i];
@@ -204,11 +223,16 @@ Coins: {playerStats.coin}
                     EventManager.ItemFetched(pickUp.item, pickUp.stackSize);
 
                     Destroy(pickUp.gameObject);
-                }else{
+                }
+                // Trường hợp không còn vị trí trống ==> vứt ra map
+                else{
                     pickUp.transform.position = dropPos.position;
                 }
             }
-        }else{ // Vật phẩm chỉ có 1 stack
+        }
+        // Vật phẩm chỉ có 1 stack (Kiếm, Trang bị ...)
+        else{
+            // Vị trí trống để thêm vật phẩm đó
             InventorySlot emptySlot = null;
 
             // Tìm vị trí trống
@@ -227,13 +251,18 @@ Coins: {playerStats.coin}
                 EventManager.ItemFetched(pickUp.item, pickUp.stackSize);
 
                 Destroy(pickUp.gameObject);
-            }else{
+            }
+            // Không còn ==> vứt ra map
+            else{
                 pickUp.transform.position = dropPos.position;
             }
 
         }
     }
 
+    // Tương thêm vật phẩm vào kho đồ khi hoàn thành nhiệm vụ
+    // Tương tự khi nhặt
+    // Khác ở chỗ không phải Destroy
     public void AddItem(Item item, int stackSize){
         // Stackable
         if(item.maxStack > 1){
@@ -316,7 +345,9 @@ Coins: {playerStats.coin}
         }
     }
 
+    // Vứt vật phẩm "trong kho đồ" ra map
     public void DropItem(InventorySlot item){
+        // Khởi tạo object tại vị trí 'dropPos' và gán thông tin cho nó
         PickUp pickUp = Instantiate(dropModel, dropPos).GetComponent<PickUp>();
 
         pickUp.transform.position = dropPos.position;
@@ -326,9 +357,11 @@ Coins: {playerStats.coin}
         pickUp.stackSize = item.stackSize;
         pickUp.SetSerialize();
 
+        // Xóa vật phẩm hiện tại trong kho đồ
         item.DeleteItem();
     }
 
+    // Vứt vật phẩm với stack ra map
     public void DropItem(Item item, int stackSize){
         PickUp pickUp = Instantiate(dropModel, dropPos).GetComponent<PickUp>();
 
@@ -340,8 +373,9 @@ Coins: {playerStats.coin}
         pickUp.SetSerialize();
     }
     
+    // Đổi chỗ vật phẩm
     public void SwapItems(InventorySlot from, InventorySlot to){
-        // Sự kiện khi nhặt vật phẩm trong rương
+        // Sự kiện khi nhặt vật phẩm trong rương (Kéo từ rương vào kho đồ)
         if(from.itemType == ItemType.Chest && to.itemType == ItemType.None){
             // Event
             EventManager.ItemFetched(from.item, from.stackSize);
@@ -364,7 +398,7 @@ Coins: {playerStats.coin}
             }
         }
 
-        // Swap
+        // Swap 2 vật phẩm khác nhau
         if(from.item != to.item){
             Item _item = from.item;
             int _stackSize = from.stackSize;
@@ -375,7 +409,9 @@ Coins: {playerStats.coin}
             to.item = _item;
             to.stackSize = _stackSize;
         }
+        // Swap 2 vật phẩm giống nhau
         else{
+            // Vật phẩm có thể stack ==> Cộng dồn stack vào
             if(from.item.maxStack > 1){
                 if(from.stackSize + to.stackSize > from.item.maxStack){
                     int amountLeft = (from.stackSize + to.stackSize) - from.item.maxStack;
@@ -383,7 +419,9 @@ Coins: {playerStats.coin}
                     from.stackSize = amountLeft;
                     to.stackSize = to.item.maxStack;
                 }
-            }else{
+            }
+            // Không thể stack ==> Đổi chỗ
+            else{
                 Item _item = from.item;
                 int _stackSize = from.stackSize;
 
@@ -395,7 +433,7 @@ Coins: {playerStats.coin}
             }
         }
 
-        // Cập nhật slot
+        // Cập nhật lại 2 slot tương ứng
         from.UpdateSlot();
         to.UpdateSlot();
 
@@ -405,6 +443,7 @@ Coins: {playerStats.coin}
         return slot.itemType != ItemType.None && slot.itemType != ItemType.Chest;
     } 
 
+    // Mở kho đồ ==> Khởi tạo trang bị
     public void OpenInventory(){
         GenerateEquipment();
 
@@ -412,13 +451,16 @@ Coins: {playerStats.coin}
         hudUI.SetActive(false);
     }
 
+    // Đóng kho đó
     public void CloseInventory(){
         inventoryUI.SetActive(false);
         hudUI.SetActive(true);
 
+        // Fix lỗi nếu đã hiển thị thông tin vật phẩm mà đóng luôn thì vẫn hiện trên màn hình
         DestroyItemInfo();
     }
 
+    // Vứt tất cả vật phẩm trong kho đồ khi chết
     public void DropAllItems(){
         // Drop items
         for (int i = 0; i < inventorySlots.Length; i++){
@@ -438,11 +480,13 @@ Coins: {playerStats.coin}
         playerEquipment.DeleteAllEquipments();
     }
 
+    // Hiển thị thông tin vật phẩm khi di chuột vào
     public void DisplayItemInfo(Item item, Vector2 buttonPosition, float offsetX, float offsetY){
         if(currentItemInfo != null){
             Destroy(currentItemInfo.gameObject);
         }
 
+        // Vị trí hiển thị
         buttonPosition.x += offsetX;
         buttonPosition.y += offsetY;
 
@@ -450,12 +494,15 @@ Coins: {playerStats.coin}
         currentItemInfo.GetComponent<ItemInfo>().Initialize(item);
     }
 
+    // Ẩn thông tin vật phẩm
     public void DestroyItemInfo(){
         if(currentItemInfo != null){
             Destroy(currentItemInfo.gameObject);
         }
     }
 
+    // Kiểm tra trong kho đồ có chìa khóa nhà giam không?
+    // Áp dụng với cửa cần chìa khóa để mở
     public bool CheckPrisonKey(string ID){
         for (int i = 0; i < inventorySlots.Length; i++){
             if(inventorySlots[i].item != null && inventorySlots[i].item.ID == ID){

@@ -142,7 +142,7 @@ public class QuestGiver : NPC
         Debug.Log("Assigned Quest");
 
         // Trường hợp nhận quest hộ tống
-        if(npcName == "Tyeis" && currentQuest == 1){
+        if(npcName == "Tyeis" && quests[currentQuest].questName == "Escort Tyeis"){
             GetComponent<EscortManager>().StartEscort(playerManager);
 
             questMarker.sprite = unavailable;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
@@ -33,8 +34,13 @@ public class MapManager : MonoBehaviour
 
             if(spawnPoint != null){
                 GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
+                
                 if(playerObject != null){
+                    playerObject.GetComponentInChildren<EventSystem>().enabled = true;
+
+                    PauseMenuManager pmm = playerObject.GetComponentInChildren<PauseMenuManager>();
+                    if(pmm.isPaused) pmm.ResumeGame();
+
                     playerObject.transform.position = spawnPoint.transform.position;
                     playerObject.transform.eulerAngles = spawnPoint.transform.eulerAngles;
                 }

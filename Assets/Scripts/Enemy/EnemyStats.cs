@@ -42,7 +42,7 @@ public class EnemyStats : CharacterStats
 
     // Start is called before the first frame update
     void Start(){
-        teamID = 1;
+        teamID = 0;
         
         maxHealth = GetHealthByLevel();
         currentHealth = maxHealth;

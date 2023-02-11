@@ -26,6 +26,7 @@ public class ShopManager : Interactable
     PlayerInput playerInput;
     PlayerStats playerStats;
 
+
     [Header("Item Infor Refs")]
     public GameObject itemInfo;
     public ShopBuySlot currentBuyItem;
@@ -222,6 +223,7 @@ public class ShopManager : Interactable
                 coinText.text = playerStats.coin.ToString();
 
                 playerInput.inventoryManager.AddItem(currentBuyItem.item, stack);
+                playerInput.playerManager.characterSound.PlaySound("buySell");
 
                 CheckCanBuyItem(totalPrice);
             }else{
@@ -247,6 +249,7 @@ public class ShopManager : Interactable
                 playerInput.inventoryManager.inventorySlots[currentSellItem.index].UpdateSlot();
                 currentSellItem.UpdateStackSize(remainStack);
             }
+            playerInput.playerManager.characterSound.PlaySound("buySell");
         }
         else{
             Debug.Log("shopType is not valid");

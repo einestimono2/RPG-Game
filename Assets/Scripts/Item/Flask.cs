@@ -15,6 +15,8 @@ public class Flask : Consumable
     public override void AttemptToConsumableItem(AnimatorManager animatorManager, WeaponSlotManager weaponSlotManager, PlayerEffects playerEffects)
     {
         base.AttemptToConsumableItem(animatorManager, weaponSlotManager, playerEffects);
+
+        // Tạo đối tượng
         GameObject flask = Instantiate(itemModel, weaponSlotManager.leftHand.position);
         // Thêm vào playereffects
         playerEffects.currentParticleFX = fx;

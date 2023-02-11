@@ -1,16 +1,18 @@
 using UnityEngine;
 
+// Hành động kéo cung lên khi ngắm
 [CreateAssetMenu(menuName = "Item Actions/Draw Arrow Action")]
 public class DrawArrowAction : ItemAction
 {
     public override void PerformAction(PlayerManager playerManager){
         if(playerManager.isInteracting || playerManager.isHoldingArrow || playerManager.playerEquipment.arrowStack <= 0) return;
 
+        // Set aim
         Aim(playerManager);
 
-        // Animation
+        // Animation của player ==> Đổi animation di chuyển
         playerManager.playerAnimator.anim.SetBool("isHoldingArrow", true);
-        playerManager.playerAnimator.PlayAnimation("Get Arrow", false);
+        playerManager.playerAnimator.PlayAnimation("Get Arrow", true);
 
         // Tạo arrow
         GameObject loadedArrow = Instantiate(playerManager.playerEquipment.arrow.loadedItemModel, playerManager.weaponSlotManager.rightHand.transform);

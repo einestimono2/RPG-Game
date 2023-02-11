@@ -83,6 +83,7 @@ public class PlayerStats : CharacterStats
         currentHealth -= 1;
         
         // Hurt Animation
+        playerManager.characterSound.PlaySound("hit");
         playerAnimator.PlayAnimation("Hit", true);
 
         // Death
@@ -113,10 +114,10 @@ public class PlayerStats : CharacterStats
         // Debug.Log("No Animation - Damage nhận: " + damage);
 
         // currentHealth -= damage;
-        currentHealth -= 1;
 
         // Block Animation
         playerAnimator.PlayAnimation(animation, true);
+        playerManager.characterSound.PlaySound("block");
 
         // Death
         if(currentHealth <= 0){
@@ -136,6 +137,7 @@ public class PlayerStats : CharacterStats
 
     public void HealHP(float health){
         currentHealth += health;
+        playerManager.characterSound.PlaySound("heal");
         if(currentHealth > maxHealth) currentHealth = maxHealth;
         healthSlider.value = currentHealth/maxHealth;
         healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0"); 

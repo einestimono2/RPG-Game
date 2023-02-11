@@ -22,7 +22,7 @@ public class AttackState : State
             return pursueTargetState;
         }
 
-        RotateTowardsTargetWhilstAttacking(enemyManager);
+        // RotateTowardsTargetWhilstAttacking(enemyManager);
 
         if(willComboNextAttack && enemyManager.canCombo){
             // Thực hiện combo
@@ -46,6 +46,7 @@ public class AttackState : State
 
     void PerformAttack(EnemyAnimator enemyAnimator, EnemyManager enemyManager){
         enemyAnimator.PlayAnimation(currentAttack.actionAnimation, true);
+        RotateTowardsTargetWhilstAttacking(enemyManager);
         enemyAnimator.PlayWeaponTrailFX();
         
         // Đặt Cooldown
@@ -57,7 +58,8 @@ public class AttackState : State
     void PerformAttackWithCombo(EnemyAnimator enemyAnimator, EnemyManager enemyManager){
         willComboNextAttack = false;
         enemyAnimator.PlayAnimation(currentAttack.comboAction.actionAnimation, true);
-        enemyAnimator.PlayWeaponTrailFX();
+        RotateTowardsTargetWhilstAttacking(enemyManager);
+        enemyAnimator.PlayWeaponTrailFX(enemyManager.enemyStats.isBoss ? true : false);
 
         // Đặt Cooldown
         enemyManager.currentCooldownTime = currentAttack.cooldown;
@@ -67,7 +69,7 @@ public class AttackState : State
     }
 
     void RotateTowardsTargetWhilstAttacking(EnemyManager enemyManager){
-        if(enemyManager.canRotate && enemyManager.isInteracting){
+        if(enemyManager.isInteracting){
             Vector3 direction = enemyManager.target.transform.position - enemyManager.transform.position;
             direction.y = 0;
             direction.Normalize();

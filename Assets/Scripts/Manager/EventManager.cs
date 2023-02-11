@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Quản lý các sự kiện trong game
 public class EventManager : MonoBehaviour
 {
     // Sự kiện giết quái vật
@@ -46,6 +47,14 @@ public class EventManager : MonoBehaviour
 
     public static void BossFight(BossFightCollider collider, CharacterStats playerStats){
         if(OnBossFight != null) OnBossFight(collider, playerStats);
+    }
+
+    // Sự kiện khi bắt đầu vào đánh BOSS nhỏ
+    public delegate void SmallBossFightEventHandler(BossFightCollider collider, CharacterStats playerStats);
+    public static event SmallBossFightEventHandler OnSmallBossFight;
+
+    public static void SmallBossFight(BossFightCollider collider, CharacterStats playerStats){
+        if(OnSmallBossFight != null) OnSmallBossFight(collider, playerStats);
     }
 
     // Sự kiện khi hoàn thành hộ tống
