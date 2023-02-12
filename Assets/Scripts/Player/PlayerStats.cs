@@ -75,16 +75,11 @@ public class PlayerStats : CharacterStats
     public override void TakeDame(float damage){
         if(isDead) return;
 
-        Debug.Log("Aniamton - Damage gốc: " + damage);
-
         float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100) * (1 - baseDEF / 100);
 
         damage = Mathf.RoundToInt(damage - (damage * totalDamageAbsorption));
 
-        Debug.Log("Aniamton - Damage nhận: " + damage);
-
-        // currentHealth -= damage;
-        currentHealth -= 1;
+        currentHealth -= damage;
         
         // Hurt Animation
         playerManager.characterSound.PlaySound("hit");
@@ -109,15 +104,11 @@ public class PlayerStats : CharacterStats
     public override void TakeDameAfterBlock(float damage, string animation = "Block Guard"){
         if(isDead) return;
 
-        // Debug.Log("No Animation - Damage gốc: " + damage);
-
         float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100) * (1 - baseDEF / 100);
 
         damage = Mathf.RoundToInt(damage - (damage * totalDamageAbsorption));
 
-        // Debug.Log("No Animation - Damage nhận: " + damage);
-
-        // currentHealth -= damage;
+        currentHealth -= damage;
 
         // Block Animation
         playerAnimator.PlayAnimation(animation, true);

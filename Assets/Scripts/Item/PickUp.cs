@@ -26,7 +26,10 @@ public class PickUp : Interactable, ISerializationCallbackReceiver
     // 2D Icon ở trên map
     public void SetSerialize(){
         GetComponentInChildren<SpriteRenderer>().sprite = item.itemIcon;
-        EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+
+        #if UNITY_EDITOR
+            EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+        #endif
     }
 
     void ISerializationCallbackReceiver.OnAfterDeserialize(){

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using System;
 
 public class SceneController : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class SceneController : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress /.9f);
 
             loadingSlider.value = progress;
-            progressText.text = progress * 100f + " %";
+            progressText.text = String.Format("{0:0.00}", progress * 100f) + " %";
 
             yield return null;
         }
