@@ -27,6 +27,9 @@ public class EscortManager : MonoBehaviour
     }
 
     private void Update() {
+        // Chạy/dừng animation dựa theo nav mesh agent (nếu đang đi ==> chạy animation và ngược lại) 
+        anim.SetBool("isMoving", nav.velocity.magnitude > 0.01f);
+
         // Chạy theo target (player)
         if(target != null){
             nav.SetDestination(target.transform.position);
@@ -34,9 +37,6 @@ public class EscortManager : MonoBehaviour
 
         // Chạy tới địa điểm chỉ định
         if(isMovingToStandPosition){
-            // Chạy/dừng animation dựa theo nav mesh agent (nếu đang đi ==> chạy animation và ngược lại) 
-            anim.SetBool("isMoving", nav.velocity.magnitude > 0.01f);
-
             nav.enabled = true;
             nav.SetDestination(standPosition.position);
 

@@ -432,8 +432,12 @@ Base DEF: {playerStats.baseDEF}
                 if(from.stackSize + to.stackSize > from.item.maxStack){
                     int amountLeft = (from.stackSize + to.stackSize) - from.item.maxStack;
 
-                    from.stackSize = amountLeft;
-                    to.stackSize = to.item.maxStack;
+                    to.stackSize = amountLeft;
+                    from.stackSize = from.item.maxStack;
+                }else{
+                    to.stackSize += from.stackSize;
+                    from.stackSize = 0;
+                    from.item = null;
                 }
             }
             // Không thể stack ==> Đổi chỗ
