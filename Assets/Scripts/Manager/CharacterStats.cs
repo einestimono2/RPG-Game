@@ -12,7 +12,7 @@ public class CharacterStats : MonoBehaviour
     public int healthByLevel = 10;
     public int expByLevel = 10;
     public int staminaByLevel = 10;
-    
+
     [Header("HP")]
     public float maxHealth = 100;
     public float currentHealth = 100;

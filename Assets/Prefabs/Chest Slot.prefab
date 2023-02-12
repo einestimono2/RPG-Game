@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da20c14b0d3a92746a6f5aee90385e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetX: -135
+  offsetX: -235
   offsetY: 0
   itemType: 5
   equipType: 7

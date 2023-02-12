@@ -17,9 +17,7 @@ MonoBehaviour:
   equipType: 0
   itemIcon: {fileID: 21300000, guid: 88ae52c17289b1b45b05a022de03b59d, type: 3}
   itemName: Prison Key
-  itemDescription: 
+  itemDescription: "Used to open the prison\r"
   price: 0
   maxStack: 1
   itemModel: {fileID: 322969909244090201, guid: 1a4ce7ed7389af14cbc47a4b3ba8a164, type: 3}
-  animation: 
-  isInteracting: 0

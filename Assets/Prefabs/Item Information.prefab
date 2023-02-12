@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 8267761141343239025}
   itemName: {fileID: 7055212774379007861}
-  itemDescription: {fileID: 6376597452074585247}
+  itemDescription: {fileID: 8267761142355965670}
   itemStats: {fileID: 6376597452074585247}
   itemSellPrice: {fileID: 8267761142946600207}
   itemBuyPrice: {fileID: 8267761142205456061}
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 5, z: 0, w: 5}
+  m_margin: {x: 25, y: 5, z: 25, w: 5}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 5, z: 0, w: 5}
+  m_margin: {x: 25, y: 5, z: 25, w: 5}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

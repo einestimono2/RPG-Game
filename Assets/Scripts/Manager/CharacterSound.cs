@@ -17,7 +17,6 @@ public class CharacterSound : MonoBehaviour
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
     }
-
     public void PlaySound(string type){
         switch (type)
         {

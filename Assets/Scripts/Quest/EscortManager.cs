@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+// Dùng trong nhiệm vụ hộ tống
 public class EscortManager : MonoBehaviour
 {
     [Header("Refs")]
@@ -11,6 +12,7 @@ public class EscortManager : MonoBehaviour
     NavMeshAgent nav;
     Animator anim;
 
+    // Dùng khi hoàn thành nheiejm vụ rồi ==> NPC sẽ đi tới địa điểm chỉ định để đứng ở đấy
     public bool isMovingToStandPosition = false;
 
     private void Awake() {
@@ -25,20 +27,28 @@ public class EscortManager : MonoBehaviour
     }
 
     private void Update() {
+        // Chạy theo target (player)
         if(target != null){
             nav.SetDestination(target.transform.position);
         }
 
+        // Chạy tới địa điểm chỉ định
         if(isMovingToStandPosition){
+            // Chạy/dừng animation dựa theo nav mesh agent (nếu đang đi ==> chạy animation và ngược lại) 
+            anim.SetBool("isMoving", nav.velocity.magnitude > 0.01f);
+
             nav.enabled = true;
             nav.SetDestination(standPosition.position);
 
+            // Kiểm tra khoảng cách giữa npc và địa điểm chỉ định xem gần nhau nhất chưa? (khó có thể = nhau đc)
+            // Nếu sát nhau thì quay NPC ngược lại (fix trường hợp hướng/nhìn vào tường)
             if(Vector3.Distance(standPosition.position, transform.position) <= 0.05f){
+                // Dừng chạy
                 nav.enabled = false;
                 isMovingToStandPosition = false;
-                anim.SetBool("isMoving", false);
 
-                transform.eulerAngles =new Vector3(
+                // Cập nhật rotation
+                transform.eulerAngles = new Vector3(
                     transform.eulerAngles.x,
                     0,
                     transform.eulerAngles.z
@@ -47,31 +57,24 @@ public class EscortManager : MonoBehaviour
         }
     }
 
+    // Bắt đầu hộ tống (NPC chạy theo player)
     public void StartEscort(PlayerManager _target){
         nav.enabled = true;
         npc.isEscorting = true;
         target = _target;
-        anim.SetBool("isMoving", true);
     }
 
+    // Hoàn thành hộ tống
     public void CompleteEscort(){
         EventManager.EscortCompleted(npc);
 
         nav.enabled = false;
         npc.isEscorting = false;
         target = null;
-        anim.SetBool("isMoving", false);
-
-        // Quay huong nguoi vao trong phong
-        transform.eulerAngles =new Vector3(
-            transform.eulerAngles.x,
-            135,
-            transform.eulerAngles.z
-        );
     }
 
+    // Đi tới địa điểm đứng khi nhận thưởng từ NPC xog
     public void MoveToStandPoint(){
         isMovingToStandPosition = true;
-        anim.SetBool("isMoving", true);
     }
 }

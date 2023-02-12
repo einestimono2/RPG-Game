@@ -8,7 +8,10 @@ public class PlayerStats : CharacterStats
     [Header("UI")]
     public Slider healthSlider;
     public TextMeshProUGUI healthText;
+
     public Slider expSlider;
+    public TMP_Text levelText;
+
     public Slider staminaSlider;
 
     PlayerAnimator playerAnimator;
@@ -47,6 +50,7 @@ public class PlayerStats : CharacterStats
         currentEXP = 0;
         expSlider.maxValue = 1;
         expSlider.value = currentEXP/levelEXP;
+        levelText.text = level.ToString();
     }
 
     void Update(){
@@ -153,6 +157,7 @@ public class PlayerStats : CharacterStats
         while(currentEXP >= levelEXP){
             currentEXP -= levelEXP;
             level += 1;
+            levelText.text = level.ToString();
             levelEXP = GetEXPByLevel(level);
             expSlider.value = currentEXP/levelEXP;
 
