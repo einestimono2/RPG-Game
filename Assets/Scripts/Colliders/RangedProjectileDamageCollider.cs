@@ -8,6 +8,7 @@ public class RangedProjectileDamageCollider : DamageCollider
     protected GameObject penetratedProjectile;
 
     protected override void OnTriggerEnter(Collider other){
+      
         // Mũi tên trúng player (tương tự damage collider)
         if(other.tag == "Player"){
             parried = false;

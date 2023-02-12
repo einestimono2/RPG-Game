@@ -76,12 +76,12 @@ public class DamageCollider : MonoBehaviour
                 if(enemyManager.isInvulnerable) return;
                 // Cùng teamID thì không nhận sát thương
                 if(enemyManager.enemyStats.teamID == teamID) return;
-                
+       
                 // Lấy vị trí va chạm
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 // Chạy hiệu ứng mất máu
                 enemyManager.enemyEffects.PlayBloodSplatterFX(contactPoint);
-
+              
                 // Tính tổng lượng sát thương gây ra cho quái vật
                 DealDamage(characterManager as PlayerManager, enemyManager.enemyStats);
                 // Tắt luôn collider khi đã gây sát thương (fix trường hợp khi đánh gây nhiêu lần sát thương)

@@ -51,6 +51,7 @@ public class FireArrowAction : ItemAction
         damageCollider.arrow = playerManager.playerEquipment.arrow;
         damageCollider.currentWeaponDamage = playerManager.playerEquipment.arrow.damage + playerManager.playerEquipment.leftWeapon.baseDamage;
         damageCollider.characterManager = playerManager;
+        damageCollider.teamID = playerManager.playerStats.teamID;
 
         playerManager.isAiming = false;
         // Cập nhật số lượng mũi tên
