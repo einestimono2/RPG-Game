@@ -23,11 +23,15 @@ MonoBehaviour:
   weaponPrefab: {fileID: 5865946802224559947, guid: f51c7f2fc4d100642b45fce8e73a0582, type: 3}
   isUnarmed: 0
   weaponType: 1
-  baseDamage: 15
+  baseDamage: 30
+  lightAttackDamageModifier: 1
+  heavyAttackDamageModifier: 1.5
   damageAbsorption: 0
-  baseStamina: 100
-  lightAttackMultiplier: 1
-  heavyAttackMultiplier: 1.5
+  stability: 67
+  baseStaminaCost: 10
+  lightAttackStaminaMultiplier: 1
+  heavyAttackStaminaMultiplier: 1.5
+  guardBreakModifier: 1
   tap_LM: {fileID: 11400000, guid: 8a32f8fa83026c648ad40d2d426d620a, type: 2}
   action: {fileID: 0}
   tap_RM: {fileID: 11400000, guid: 8a32f8fa83026c648ad40d2d426d620a, type: 2}

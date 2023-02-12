@@ -23,7 +23,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 8944256436098659965, guid: ce6108ddf4de365459f74defdf759af8, type: 3}
   isUnarmed: 1
   weaponType: 0
-  baseDamage: 50
+  baseDamage: 10
   lightAttackDamageModifier: 1
   heavyAttackDamageModifier: 1.5
   damageAbsorption: 0

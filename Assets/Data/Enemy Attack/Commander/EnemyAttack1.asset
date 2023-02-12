@@ -16,7 +16,7 @@ MonoBehaviour:
   canCombo: 1
   comboAction: {fileID: 11400000, guid: 82df17087a0d38f4b803428230e34e45, type: 2}
   attackScore: 10
-  cooldown: 1.5
+  cooldown: 2
   minAttackAngle: -60
   maxAttackAngle: 60
   minDistanceToAttack: 0

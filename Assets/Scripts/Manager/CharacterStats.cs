@@ -28,7 +28,10 @@ public class CharacterStats : MonoBehaviour
     [Header("Currency")]
     public int coin = 0;
 
-    [Header("Armor Absorptions")]
+    [Header("Equipment Buff")]
+    public float atkGloves;
+
+    [Header("Equipment Absorptions")]
     public float damageAbsorptionHelmet;
     public float damageAbsorptionArmor;
     public float damageAbsorptionLegs;
@@ -40,11 +43,26 @@ public class CharacterStats : MonoBehaviour
     public float blockingDamageAbsorption; // % damage giảm
     public float blockingStabilityRating; // % stamina mất khi chặn lượng damage
 
+    [Header("Base Atrributes")]
+    public int attributePoints = 0;
+    public float baseATK = 0;
+    public float atkByPoint = 5;
+    public float baseDEF = 0;
+    public float defByPoint = 1;
+    public float baseHP = 0;
+    public float hpByPoint = 10;
+    public float baseSTA = 0;
+    public float staByPoint = 20;
+
     public virtual void TakeDame(float damage){
         
     }
 
     public virtual void TakeDameAfterBlock(float damage, string animation = "Block Guard"){
         
+    }
+
+    public float GetCurrentDamage(){
+        return baseATK + atkGloves;
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   canCombo: 0
   comboAction: {fileID: 0}
   attackScore: 5
-  cooldown: 1.5
+  cooldown: 2
   minAttackAngle: -60
   maxAttackAngle: 60
   minDistanceToAttack: 0

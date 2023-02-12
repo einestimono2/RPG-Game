@@ -62,6 +62,7 @@ public class EquipmentManager : MonoBehaviour
                 glovesModelChanger.UnEquipAllModels();
                 glovesModelChanger.EquipModelByName(modelName);
                 playerStats.damageAbsorptionGloves = modelName == "" ? 0 : playerEquipment.gloves.def;
+                playerStats.atkGloves = modelName == "" ? 0 : playerEquipment.gloves.atk;
                 break;
             case EquipType.Cape:
                 capeModelChanger.UnEquipAllModels();

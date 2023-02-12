@@ -24,7 +24,7 @@ MonoBehaviour:
   upwardVelocity: 0
   arrowMass: 0
   useGravity: 0
-  damage: 10
+  damage: 15
   loadedItemModel: {fileID: 4744046806175583683, guid: 24a195e9e1835314785ae18e6e02476d, type: 3}
   liveItemModel: {fileID: 4744046806175583683, guid: cd57a144e686f4241abe16903774e481, type: 3}
   penetratedItemModel: {fileID: 4744046806175583683, guid: aa58e16500d74874095f4eade5958bc9, type: 3}

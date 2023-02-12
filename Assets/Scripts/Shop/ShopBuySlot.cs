@@ -134,8 +134,9 @@ $@"→ AMOUNT
 ";
 
     string GetEquipmentStats(EquipmentData _item) => 
-$@"→ DEFENSE
-   • Def: {_item.def.ToString()}
+$@"→ STATS BUFF
+   • DEF: {_item.def.ToString()}
+   • ATK: {_item.atk.ToString()}
 ";
 
 }

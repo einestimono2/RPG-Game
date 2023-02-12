@@ -11,6 +11,9 @@ public class InventoryManager : MonoBehaviour
     [Header("UI")]
     public GameObject inventoryUI;
     public GameObject hudUI;
+    public GameObject attributePointsUI;
+    public GameObject addAttributePointsButton;
+    public GameObject equipmentUI;
 
     [Header("Drop Item")]
     public GameObject dropModel;
@@ -28,6 +31,8 @@ public class InventoryManager : MonoBehaviour
     
     [Header("Equipment Slot")]
     public TMP_Text playerInfo;
+    public TMP_Text attributePointText;
+    public TMP_Text coinsText;
     public InventorySlot[] equipmentSlots;
 
     [Header("Ref")]
@@ -124,12 +129,23 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Player Information
-        playerInfo.text = 
-        $@"Level: {playerStats.level} ({playerStats.currentEXP}/{playerStats.levelEXP})
-HP: {playerStats.currentHealth} ({playerStats.currentHealth}/{playerStats.maxHealth})
-Stamina: {playerStats.currentStamina} ({playerStats.currentStamina}/{playerStats.maxStamina})
+        GeneratePlayerInfo();
+    }
 
-Coins: {playerStats.coin}
+    void GeneratePlayerInfo(){
+        if(playerStats.attributePoints > 0) addAttributePointsButton.SetActive(true);
+        else addAttributePointsButton.SetActive(false);
+
+        attributePointText.text = "Points: " + playerStats.attributePoints.ToString();
+        coinsText.text = "Coins: " + playerStats.coin.ToString();
+
+        playerInfo.text = 
+        $@"Level: {playerStats.level} ({playerStats.currentEXP} / {playerStats.levelEXP})
+        
+HP: {playerStats.currentHealth} / {playerStats.maxHealth}
+Stamina: {playerStats.currentStamina} / {playerStats.maxStamina}
+Base ATK: {playerStats.baseATK}
+Base DEF: {playerStats.baseDEF}
         ";
     }
 
@@ -449,6 +465,9 @@ Coins: {playerStats.coin}
 
         inventoryUI.SetActive(true);
         hudUI.SetActive(false);
+
+        equipmentUI.SetActive(true);
+        attributePointsUI.SetActive(false);
     }
 
     // Đóng kho đó
@@ -511,5 +530,17 @@ Coins: {playerStats.coin}
         }
 
         return false;
+    }
+
+    public void OpenAttributePointsUI(){
+        equipmentUI.SetActive(false);
+        attributePointsUI.SetActive(true);
+    }
+
+    public void CloseAttributePointsUI(){
+        equipmentUI.SetActive(true);
+        attributePointsUI.SetActive(false);
+
+        GeneratePlayerInfo();
     }
 }

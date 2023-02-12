@@ -45,11 +45,13 @@ public class RangedProjectileDamageCollider : DamageCollider
 
             if(enemyManager != null){
                 if(enemyManager.isInvulnerable) return;
+                // Cùng teamID thì không nhận sát thương
+                if(enemyManager.enemyStats.teamID == teamID) return;
 
                 Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 enemyManager.enemyEffects.PlayBloodSplatterFX(contactPoint);
 
-                enemyManager.enemyStats.TakeDame(currentWeaponDamage);
+                enemyManager.enemyStats.TakeDame(currentWeaponDamage + (characterManager as PlayerManager).playerStats.GetCurrentDamage());
 
                 if(enemyManager.target == null){
                     enemyManager.target = characterManager.GetComponent<CharacterStats>();

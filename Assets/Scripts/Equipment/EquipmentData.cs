@@ -10,6 +10,7 @@ public class EquipmentData : Item
 
     [Header("Def")]
     public float def = 10;
+    public float atk = 0;
 
     public void Awake(){
         itemType = ItemType.Equipment;

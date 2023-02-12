@@ -23,7 +23,6 @@ public class Chest : Interactable
 
     [Header("UI")]
     public GameObject decorationsUI;
-    public GameObject equipmentUI;
     public GameObject chestUI;
 
     [Header("Items")]
@@ -68,7 +67,7 @@ public class Chest : Interactable
     //! Load scene sẽ bị mất tham chiếu do rương đó ở map khác, trong khi tham chiếu này ở map trước đó
     void AssignRefs(){
         if(decorationsUI == null) decorationsUI = playerInput.playerManager.decorationsUI;
-        if(equipmentUI == null) equipmentUI = playerInput.playerManager.equipmentUI;
+        if(inventoryManager.equipmentUI == null) inventoryManager.equipmentUI = playerInput.playerManager.equipmentUI;
         if(chestUI == null) chestUI = playerInput.playerManager.chestUI;
         if(chestSlotParent == null) chestSlotParent = playerInput.playerManager.chestSlotParent;
     }
@@ -88,7 +87,7 @@ public class Chest : Interactable
         inventoryManager.hudUI.SetActive(false);
         
         decorationsUI.SetActive(false);
-        equipmentUI.SetActive(false);
+        inventoryManager.equipmentUI.SetActive(false);
         chestUI.SetActive(true);
     }
 
@@ -105,7 +104,7 @@ public class Chest : Interactable
         inventoryManager.hudUI.SetActive(true);
 
         decorationsUI.SetActive(true);
-        equipmentUI.SetActive(true);
+        inventoryManager.equipmentUI.SetActive(true);
         chestUI.SetActive(false);
 
         inventoryManager.DestroyItemInfo();

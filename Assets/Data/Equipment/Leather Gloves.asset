@@ -22,3 +22,4 @@ MonoBehaviour:
   maxStack: 1
   modelName: PT_Male_Armor_cloth_00_gauntlets
   def: 2
+  atk: 5

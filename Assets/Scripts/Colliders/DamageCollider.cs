@@ -56,7 +56,7 @@ public class DamageCollider : MonoBehaviour
                 playerManager.playerEffects.PlayBloodSplatterFX(contactPoint);
 
                 // Sát thương dựa theo loại tấn công
-                playerManager.playerStats.TakeDame(currentWeaponDamage);
+                playerManager.playerStats.TakeDame(currentWeaponDamage + (characterManager as EnemyManager).enemyStats.GetCurrentDamage());
                 // Tắt luôn collider khi đã gây sát thương (fix trường hợp khi đánh gây nhiêu lần sát thương)
                 DisableCollider();
 
@@ -134,7 +134,7 @@ public class DamageCollider : MonoBehaviour
 
     // Tính toán lượng sát thương gây ra dựa theo loại tấn công và hệ số sát thương của loại tấn công đó
     protected virtual void DealDamage(PlayerManager playerManager, EnemyStats enemyStats){
-        float finalDamage = currentWeaponDamage;
+        float finalDamage = currentWeaponDamage + playerManager.playerStats.GetCurrentDamage();
 
         // Check tay nào đang thực hiện đánh
         if(playerManager.isUsingRightHand){

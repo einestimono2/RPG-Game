@@ -39,12 +39,12 @@ public class PlayerStats : CharacterStats
         maxStamina = GetStaminaByLevel(level);
         currentStamina = maxStamina;
         staminaSlider.maxValue = 1;
-        staminaSlider.value = currentStamina/maxStamina;
+        staminaSlider.value = 1;
         
         maxHealth = GetHealthByLevel(level);
         currentHealth = maxHealth;
         healthSlider.maxValue = 1;
-        healthSlider.value = currentHealth/maxHealth;
+        healthSlider.value = 1;
 
         levelEXP = GetEXPByLevel(level);
         currentEXP = 0;
@@ -58,7 +58,7 @@ public class PlayerStats : CharacterStats
     }
 
     float GetHealthByLevel(int currentLevel){
-        maxHealth = healthByLevel * 10 * currentLevel;
+        maxHealth = healthByLevel * 10 * currentLevel + baseHP;
         return maxHealth;
     }
 
@@ -68,7 +68,7 @@ public class PlayerStats : CharacterStats
     }
 
     float GetStaminaByLevel(int currentLevel){
-        maxStamina = staminaByLevel * 10 * currentLevel;
+        maxStamina = staminaByLevel * 10 * currentLevel + baseSTA;
         return maxStamina;
     }
 
@@ -77,7 +77,7 @@ public class PlayerStats : CharacterStats
 
         Debug.Log("Aniamton - Damage gốc: " + damage);
 
-        float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100);
+        float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100) * (1 - baseDEF / 100);
 
         damage = Mathf.RoundToInt(damage - (damage * totalDamageAbsorption));
 
@@ -111,7 +111,7 @@ public class PlayerStats : CharacterStats
 
         // Debug.Log("No Animation - Damage gốc: " + damage);
 
-        float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100);
+        float totalDamageAbsorption = 1 - (1 - damageAbsorptionArmor / 100) * (1 - damageAbsorptionHelmet / 100) * (1 - damageAbsorptionLegs / 100) * (1 - damageAbsorptionBoots / 100) * (1 - damageAbsorptionGloves / 100) * (1 - damageAbsorptionCape / 100) * (1 - baseDEF / 100);
 
         damage = Mathf.RoundToInt(damage - (damage * totalDamageAbsorption));
 
@@ -157,6 +157,7 @@ public class PlayerStats : CharacterStats
         while(currentEXP >= levelEXP){
             currentEXP -= levelEXP;
             level += 1;
+            attributePoints++;
             levelText.text = level.ToString();
             levelEXP = GetEXPByLevel(level);
             expSlider.value = currentEXP/levelEXP;
@@ -221,4 +222,13 @@ public class PlayerStats : CharacterStats
         staminaSlider.value = currentStamina < 0 ? 0 : currentStamina/maxStamina;
     }
 
+    public void ConfirmAtrributePoints(){
+        maxStamina = GetStaminaByLevel(level);
+        staminaSlider.value = currentStamina/maxStamina;
+        
+        maxHealth = GetHealthByLevel(level);
+        currentHealth = maxHealth;
+        healthSlider.value = 1;
+        healthText.text = currentHealth.ToString("F0") + " / " + maxHealth.ToString("F0"); 
+    }
 }
