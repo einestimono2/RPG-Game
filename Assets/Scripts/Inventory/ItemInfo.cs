@@ -50,12 +50,12 @@ public class ItemInfo : MonoBehaviour
 $@"→ DAMAGE
    • Base Damage: {_item.baseDamage.ToString()}
    • Light Attack Damage: {(_item.lightAttackDamageModifier * _item.baseDamage).ToString()}
-   • Light Attack Damage: {(_item.heavyAttackDamageModifier * _item.baseDamage).ToString()}
+   • Heavy Attack Damage: {(_item.heavyAttackDamageModifier * _item.baseDamage).ToString()}
                                                                     
 → STAMINA
    • Base Stamina: {_item.baseStaminaCost.ToString()}
-   • Light Attack Damage: {(_item.lightAttackStaminaMultiplier * _item.baseStaminaCost).ToString()}
-   • Light Attack Damage: {(_item.heavyAttackStaminaMultiplier * _item.baseStaminaCost).ToString()}
+   • Light Attack Stamina: {(_item.lightAttackStaminaMultiplier * _item.baseStaminaCost).ToString()}
+   • Heavy Attack Stamina: {(_item.heavyAttackStaminaMultiplier * _item.baseStaminaCost).ToString()}
 ";
 
     string GetShieldStats(WeaponData _item) => 
