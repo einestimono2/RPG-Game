@@ -12,7 +12,7 @@ public class EscortManager : MonoBehaviour
     NavMeshAgent nav;
     Animator anim;
 
-    // Dùng khi hoàn thành nheiejm vụ rồi ==> NPC sẽ đi tới địa điểm chỉ định để đứng ở đấy
+    // Dùng khi hoàn thành nhiệm vụ rồi ==> NPC sẽ đi tới địa điểm chỉ định để đứng ở đấy
     public bool isMovingToStandPosition = false;
 
     private void Awake() {

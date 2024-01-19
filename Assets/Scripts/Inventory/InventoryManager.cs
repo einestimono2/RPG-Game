@@ -5,6 +5,7 @@ using static Enums;
 
 public class InventoryManager : MonoBehaviour
 {
+    //Khai báo thuộc tính
     [Header("Settings")]
     public int inventorySize = 48;
 

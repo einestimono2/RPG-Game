@@ -70,6 +70,7 @@ public class ShopManager : Interactable
         else OpenShop();
     }
 
+    // Mở shop -- khởi tạo ui
     public void OpenShop(){
         coinText.text = playerStats.coin.ToString();
         filteredItems = shopItems;
@@ -88,6 +89,7 @@ public class ShopManager : Interactable
         isOpen = true;
     }
 
+    // Đóng shop -- tắt ui
     public void CloseShop(){
         currentBuyItem = null;
         currentSellItem = null;
@@ -106,6 +108,7 @@ public class ShopManager : Interactable
         buyPanel.SetActive(true);
     }
 
+    // Đổi giao diện mua hoặc bán tương ứng
     public void ChangeShopType(string type){
         if(shopType == type) return;
 
@@ -135,6 +138,7 @@ public class ShopManager : Interactable
         }
     } 
 
+    // Lọc vật phẩm trong cửa hàng theo từng loại
     public void FilteredItems(string type){
         switch (type)
         {
@@ -174,6 +178,7 @@ public class ShopManager : Interactable
         GenerateShopBUY();
     }
 
+    // Tạo từng ô vật phẩm trong phần BUY
     void GenerateShopBUY(){
         DeleteAllShopSlots(shopContainer);
 
@@ -183,6 +188,7 @@ public class ShopManager : Interactable
         }
     }
 
+    // Tạo từng ô vật phẩm trong phần SELL
     void GenerateShopSELL(){
         DeleteAllShopSlots(sellContainer);
 
@@ -202,6 +208,7 @@ public class ShopManager : Interactable
         }
     }
 
+    // Kiểm tra đủ tiền để mua hay k
     public bool CheckCanBuyItem(int price){
         if(price <= playerStats.coin){
             buttonBackground.sprite = canBuy;
@@ -212,8 +219,9 @@ public class ShopManager : Interactable
         }
     }
 
+    // Ấn mua/bán vật phẩm
     public void BuyItem(){
-        // BUY
+        // BUY - trừ tiền nếu ok
         if(shopType == "BUY"){
             int stack = Mathf.RoundToInt(itemInforStack.value);
             int totalPrice = currentBuyItem.item.price * stack;
@@ -230,7 +238,7 @@ public class ShopManager : Interactable
                 Debug.Log("Not enough coins: " + totalPrice);
             }
         }
-        // SELL
+        // SELL - cộng tiền nếu ok
         else if(shopType == "SELL"){
             int stack = Mathf.RoundToInt(itemInforStack.value);
             int totalPrice = currentSellItem.item.price * stack;
@@ -239,7 +247,7 @@ public class ShopManager : Interactable
             coinText.text = playerStats.coin.ToString();
 
             int remainStack = playerInput.inventoryManager.inventorySlots[currentSellItem.index].stackSize - stack;
-            // Bán tất cả
+            // Bán tất cả --> hủy vật phẩm đó trong kho đồ
             if(remainStack == 0){
                 playerInput.inventoryManager.inventorySlots[currentSellItem.index].DeleteItem();
                 GenerateShopSELL();

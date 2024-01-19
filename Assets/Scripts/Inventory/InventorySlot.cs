@@ -7,6 +7,7 @@ using static Enums;
 // Một ô trong kho đồ
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    // khởi tạo
     [Header("Popup Settings")]
     public float offsetX = 135f;
     public float offsetY = 0f;
@@ -30,16 +31,19 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         UpdateSlot();
     }
 
+    // cập nhật lại 1 ô 
     public void UpdateSlot(){
+        // vứt đồ hoặc là số lượng vật phẩm = 0 thì xoá đi
         if(item != null && item.itemType == ItemType.Consumable && stackSize <= 0){
             item = null;
         }
 
+        // xoá đi thì cập nhật lại icon
         if(item == null){
             icon.sprite = null;
             icon.gameObject.SetActive(false);
             stackText.gameObject.SetActive(false);
-        }else{
+        }else{ // không thì chỉ cập nhật lại icon hoặc số lượng
             icon.sprite = item.itemIcon;
             stackText.text = stackSize > 1 ? $"x{stackSize}" : "";
 
@@ -48,19 +52,23 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
+    // thêm vật phẩm vào ô đang trống
     public void AddItem(Item _item, int _stackSze = 1){
         item = _item;
         stackSize = _stackSze;
     }
 
+    // cộng thêm số lượng
     public void AddStackAmount(int _stackSze = 1){
         stackSize += _stackSze;
     }
 
+    // vứt ra ngoài nhưng vẫn nhặt đc lại
     public void DropItem(){
         GetComponentInParent<InventoryManager>().DropItem(this);
     }
 
+    // xoá vật phẩm
     public void DeleteItem(){
         item = null;
         stackSize = 0;
@@ -86,6 +94,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     // Sự kiện với chuột
     // Khi ấn chuột
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData){
+        // rường hợp bắt đầu kéo thả vật phẩm -- xóa item info nếu đang hiển thị
         if(!dragDropHandler.isDragging){
             if(eventData.button == PointerEventData.InputButton.Left && item != null){
                 // Xóa info item khi có
@@ -100,20 +109,22 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     // Khi thả chuột
     // Cập nhật lại slotFrom và slotTo
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData){
+        // Đang kéo thả item mà click == đặt item vào ô slotto
         if(dragDropHandler.isDragging){
-            // Drop
+            // ô slotto rỗng
             if(dragDropHandler.slotTo == null){
-                // Chỉ vứt được đồ vật đang nằm trong kho đồ
-                if(dragDropHandler.slotFrom.itemType != ItemType.None){
+                // Từ bên ngoài vào trong túi đò
+                if(dragDropHandler.slotFrom.itemType != ItemType.None){ 
                     dragDropHandler.slotTo = dragDropHandler.slotFrom;
                     dragDropHandler.isDragging = false;
-                }else{
+                }else{ // Vứt ra ngoài bản đồ
                     dragDropHandler.slotFrom.DropItem();
                     dragDropHandler.isDragging = false;
                 }
             }
             // Drag & Drop
             else if(dragDropHandler.slotTo != null){
+                // Kiểm tra vật phẩm có đúng loại không vd mũ - mũ, khiên - tay trái ...
                 if(CanPlaceInSlot(dragDropHandler.slotFrom, dragDropHandler.slotTo)){
                     inventoryManager.SwapItems(dragDropHandler.slotFrom, dragDropHandler.slotTo);
                     dragDropHandler.isDragging = false;

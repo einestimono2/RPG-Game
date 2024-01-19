@@ -15,6 +15,7 @@ public class ShopBuySlot : MonoBehaviour
     public TMP_Text itemDescription;
     public TMP_Text itemPrice;
 
+    // KHởi tạo ô vật phẩm - tên giá mô tả ,,,
     public void InitialSlot(Item _item, ShopManager _shopManager){
         item = _item;
         shopManager = _shopManager;
@@ -25,6 +26,7 @@ public class ShopBuySlot : MonoBehaviour
         itemPrice.text = item.price.ToString();
     }
 
+    // Khởi tạo thông tin chi tiết - có thêm chọn số lượng, nút mua ...
     public void InitialItemInfomation(){
         shopManager.itemInfo.SetActive(true);
         shopManager.itemInforButtonText.text = "BUY";
@@ -55,6 +57,7 @@ public class ShopBuySlot : MonoBehaviour
         shopManager.CheckCanBuyItem(item.price);
     }
 
+    // Cập nhật data về vũ khí: dame, mân, giá ...
     string GetAllItemStats(){
         switch (item.itemType){
             case ItemType.Weapon:
@@ -77,6 +80,7 @@ public class ShopBuySlot : MonoBehaviour
          return "";
     }
 
+    // Sự kiện khi thay đổi số lượng vật phẩm mua/bán
     void ItemStackChange(){
         int stack = Mathf.RoundToInt(shopManager.itemInforStack.value);
 		shopManager.itemInforStackText.text = stack.ToString();
@@ -87,6 +91,7 @@ public class ShopBuySlot : MonoBehaviour
         shopManager.CheckCanBuyItem(totalPrice);
 	}
 
+    // khởi tạo, hiển thị thông tin vũ khí, mana, .. hiện tại
     string GetSwordStats(WeaponData _item) => 
 $@"→ DAMAGE
    • Base Damage: {_item.baseDamage.ToString()}

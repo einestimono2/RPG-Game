@@ -6,16 +6,19 @@ public class EnemyAnimator : AnimatorManager
     EnemyManager enemyManager;
     EnemyEffects enemyEffects;
 
+    // ch?y ??u tiên ( kh?i t?o các khai báo)
     void Awake(){
         anim = GetComponent<Animator>();
         enemyManager = GetComponent<EnemyManager>();
         enemyEffects = GetComponent<EnemyEffects>();
     }
 
+    // Hi?u ?ng chém
     public void PlayWeaponTrailFX(bool isLeft = false){
         enemyEffects.PlayWeaponFX(isLeft);
     }
 
+    // Annimation
     void OnAnimatorMove(){
         enemyManager.rig.drag = 0;
 
